@@ -1,0 +1,70 @@
+import random
+import time
+import math
+from Tkinter import*
+window = Tk() 
+canvas = Canvas(window, width=400, height=300, bg='white') 
+canvas.pack(padx=10,pady=10) 
+class robot:
+    _vx=5
+    _vy=5
+    def __init__(self,x0,y0,x1=(),y1=(),speed=1.0,size=4,colour='blue'):
+        self.x0=x0
+        self.y0=y0
+        self.y1=y1
+        self.x1=x1
+        self.speed=speed
+        self.size=size
+        self.colour=colour
+
+    def roam(self):
+        v=self.speed
+        self._vx
+        self._vy
+        if self.x0<=10:
+            self._vx=5
+            self._vy=self._vy
+        if (self.x0+self.size)>=390:
+            self._vx=-5
+            self._v=-self._vy
+        if self.y0<=10:
+            self._vx=(self._vx)
+            self._vy=5
+        if self.y0+self.size>=290:
+            self._vx=(self._vx)
+            self._vy=-5
+        self.x0 += self._vx
+        self.y0 += self._vy    
+        self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.size, self.y0 + self.size) 
+        self.canvas.update()
+
+    def avoid(self):
+        k=len(self.x1)
+        l=len(self.y1)
+        while k>=0:
+            l-=1
+            k-=1
+            self.d1=math.fabs(self.x0-self.x1[k])
+            self.d2=math.fabs(self.y0-self.y1[l])
+            self.d3=(self.d1**2+self.d2**2)
+            self.d4=math.trunc(math.sqrt(self.d3))
+            self.a1=math.acos(self.d1/self.d4)
+            self.a2=math.trunc(math.degrees(self.a1))
+    def drawRobot(self, canvas): 
+        self.canvas = canvas
+        self.shape = canvas.create_oval(self.x0, self.y0, self.x0 + self.size, self.y0 + self.size, fill=self.colour)
+class obstacle:
+    def __init__(self, x1, y1, sizex,sizey): 
+        global size0
+        global size01
+        self.x1 = x1 
+        self.y1 = y1
+        self.sizex =sizex
+        self.sizey = sizey
+        self.xEnd = x1 + sizex 
+        self.yEnd = y1 + sizey 
+        size0=sizex
+        size01=sizey
+
+    def drawObstacle(self, canvas):
+        self.shape = canvas.create_rectangle(self.x1, self.y1, self.xEnd, self.yEnd, fill='grey')
