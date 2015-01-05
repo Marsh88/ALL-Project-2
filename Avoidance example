@@ -1,0 +1,39 @@
+class helper:
+    def __init__ (self, x0,y0,x1,y1):
+        self.x0=x0
+        self.y0=y0
+        self.y1=y1
+        self.x1=x1
+
+    def distance(self):
+        self.d1=math.fabs(self.x0-self.x1)
+        self.d2=math.fabs(self.y0-self.y1)
+        self.d3=(self.d1**2+self.d2**2)
+        self.d4=math.trunc(math.sqrt(self.d3))
+
+    def angle(self):
+        self.a1=math.acos(self.d1/self.d4)
+        self.a2=math.trunc(math.degrees(self.a1))
+        if self.x0>self.x1:
+            self.a2=180-self.a2
+        if self.y0>self.y1:
+            self.a2=-self.a2
+    def avoid(self):
+        global _vx
+        global _vy
+        if self.d4==30:
+                self._vx=self._vx
+                self._vy=-self._vy
+        
+                    
+
+class coord:
+    def __init__(self,x0=0,y0=0,length=1,deg=0):
+        self.x0=x0
+        self.y0=y0
+        self.length=length
+        self.deg=deg
+    def coords(self):
+        x0change=math.trunc(self.x0+(math.cos(self.deg)*self.length))
+        y0change=math.trunc(self.y0+(math.sin(self.deg)*self.length))
+        return( x0change, y0change)
