@@ -5,6 +5,7 @@ from Tkinter import*
 window = Tk() 
 canvas = Canvas(window, width=400, height=300, bg='white') 
 canvas.pack(padx=10,pady=10) 
+
 class robot:
     _vx=5
     _vy=5
@@ -38,18 +39,6 @@ class robot:
         self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.size, self.y0 + self.size) 
         self.canvas.update()
 
-    def avoid(self):
-        k=len(self.x1)
-        l=len(self.y1)
-        while k>=0:
-            l-=1
-            k-=1
-            self.d1=math.fabs(self.x0-self.x1[k])
-            self.d2=math.fabs(self.y0-self.y1[l])
-            self.d3=(self.d1**2+self.d2**2)
-            self.d4=math.trunc(math.sqrt(self.d3))
-            self.a1=math.acos(self.d1/self.d4)
-            self.a2=math.trunc(math.degrees(self.a1))
     def drawRobot(self, canvas): 
         self.canvas = canvas
         self.shape = canvas.create_oval(self.x0, self.y0, self.x0 + self.size, self.y0 + self.size, fill=self.colour)
