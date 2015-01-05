@@ -2,9 +2,7 @@ import random
 import time
 import math
 from Tkinter import*
-window = Tk() 
-canvas = Canvas(window, width=400, height=300, bg='white') 
-canvas.pack(padx=10,pady=10) 
+
 
 class robot:
     _vx=5
@@ -57,3 +55,31 @@ class obstacle:
 
     def drawObstacle(self, canvas):
         self.shape = canvas.create_rectangle(self.x1, self.y1, self.xEnd, self.yEnd, fill='grey')
+
+window = Tk() 
+canvas = Canvas(window, width=400, height=300, bg='white') 
+canvas.pack(padx=10,pady=10)
+
+c1=obstacle(random.randint(0,300),random.randint(0,200),random.randint(20,50),random.randint(20,50))
+size1=size0
+size11=size01
+c1.drawObstacle(canvas)
+c2=obstacle(random.randint(0,300),random.randint(0,200),random.randint(20,50),random.randint(20,50))
+size2=size0
+size22=size01
+c2.drawObstacle(canvas)
+c3=obstacle(random.randint(0,300),random.randint(0,200),random.randint(20,50),random.randint(20,50))
+size3=size0
+size33=size01
+c3.drawObstacle(canvas)
+list2=[c1.x1+(size1/2),c2.x1+(size2/2),c3.x1+(size3/2)]
+list3=[c1.y1+(size1/2),c2.y1+(size2/2),c3.y1+(size3/2)]
+r2d2 = robot(150, 150,list2,list3, speed = 1, colour='red') 
+r2d2.drawRobot(canvas)
+for t in range(500): 
+    r2d2.roam()
+
+    time.sleep(0.1)
+
+ 
+window.mainloop
