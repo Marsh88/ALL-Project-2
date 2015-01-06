@@ -10,35 +10,41 @@ class obstacle:
         self.yEnd = y1 + sizey 
         size0=sizex
         size01=sizey
-    def drawavoid(self,canvas):
+    def drawObstacle(self, canvas):
         l1=len(listavoidx)
         l2=len(listavoidy)
-        l=0
-        while l<l1:
-            if listavoidx[l]-self.xEnd<=self.sizex :
-                if self.x1>listavoidx[l]:
-                    self.x1=50+self.x1
-                    self.xEnd=50+self.xEnd
-                else:
-                    self.x1=self.x1-50
-                    self.xEnd= self.xEnd-50
-            if listavoidy[l]-self.yEnd <=self.sizey:
-                if self.y1<=listavoidy[l]:
-                    self.y1=self.y1-50
-                    self.yEnd=self.yEnd-50
-                else:
-                    self.y1=self.y1+50
-                    self.yEnd=self.yEnd +50
-            if self.x1<0:
-                    self.x1=(50+listavoidx[l])+self.x1
-                    self.xEnd=(50+listavoidx[l])+self.xEnd                
-            if self.xEnd>500:
-                    self.x1=self.x1-(50+listavoidx[l])
-                    self.xEnd=self.xEnd-(50+listavoidx[l])
-            if self.y1<0:
-                    self.y1=(50+listavoidy[l])+self.y1
-                    self.xEnd=(50+listavoidy[l])+self.xEnd
-            if self.yEnd>400:
-                    self.y1=self.x1-(50+listavoidy[l])  
-                    self.yEnd=self.xEnd-(50+listavoidy[l])  
-            l+=1
+        l2=0
+        while l2<3:
+            l=0
+            while l<l1:
+                if listavoidx[l]-self.xEnd<=self.sizex :
+                    if self.x1>listavoidx[l]:
+                        self.x1=50+self.x1
+                        self.xEnd=50+self.xEnd
+                    else:
+                        self.x1=self.x1-50
+                        self.xEnd= self.xEnd-50
+                if listavoidy[l]-self.yEnd <=self.sizey:
+                    if self.y1<=listavoidy[l]:
+                        self.y1=self.y1-50
+                        self.yEnd=self.yEnd-50
+                    else:
+                        self.y1=self.y1+50
+                        self.yEnd=self.yEnd +50
+                if self.x1<0:
+                        self.x1=(50+self.sizex)+self.x1
+                        self.xEnd=(50+self.sizex)+self.xEnd                
+                if self.xEnd>500:
+                        self.x1=self.x1-(50+self.sizex)
+                        self.xEnd=self.xEnd-(50+self.sizex)
+                if self.y1<0:
+                        self.y1=(50+self.sizey)+self.y1
+                        self.xEnd=(50+self.sizey)+self.xEnd
+                if self.yEnd>400:
+                        self.y1=self.y1-(50+self.sizey)  
+                        self.yEnd=self.yEnd-(50+self.sizey)  
+                l+=1
+            l2+=1        
+        listavoidx.append ( self.x1)
+        listavoidy.append ( self.y1)
+        self.shape = canvas.create_rectangle(self.x1, self.y1, self.xEnd, self.yEnd, fill='grey') 
