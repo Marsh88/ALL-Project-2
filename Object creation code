@@ -1,0 +1,44 @@
+class obstacle:
+    def __init__(self, x1, y1, sizex,sizey): 
+        global size0
+        global size01
+        self.x1 = x1 
+        self.y1 = y1
+        self.sizex =sizex
+        self.sizey = sizey
+        self.xEnd = x1 + sizex 
+        self.yEnd = y1 + sizey 
+        size0=sizex
+        size01=sizey
+    def drawavoid(self,canvas):
+        l1=len(listavoidx)
+        l2=len(listavoidy)
+        l=0
+        while l<l1:
+            if listavoidx[l]-self.xEnd<=self.sizex :
+                if self.x1>listavoidx[l]:
+                    self.x1=50+self.x1
+                    self.xEnd=50+self.xEnd
+                else:
+                    self.x1=self.x1-50
+                    self.xEnd= self.xEnd-50
+            if listavoidy[l]-self.yEnd <=self.sizey:
+                if self.y1<=listavoidy[l]:
+                    self.y1=self.y1-50
+                    self.yEnd=self.yEnd-50
+                else:
+                    self.y1=self.y1+50
+                    self.yEnd=self.yEnd +50
+            if self.x1<0:
+                    self.x1=(50+listavoidx[l])+self.x1
+                    self.xEnd=(50+listavoidx[l])+self.xEnd                
+            if self.xEnd>500:
+                    self.x1=self.x1-(50+listavoidx[l])
+                    self.xEnd=self.xEnd-(50+listavoidx[l])
+            if self.y1<0:
+                    self.y1=(50+listavoidy[l])+self.y1
+                    self.xEnd=(50+listavoidy[l])+self.xEnd
+            if self.yEnd>400:
+                    self.y1=self.x1-(50+listavoidy[l])  
+                    self.yEnd=self.xEnd-(50+listavoidy[l])  
+            l+=1
