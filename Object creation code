@@ -1,3 +1,9 @@
+window = Tk() 
+canvas = Canvas(window, width=500, height=400, bg='white') 
+canvas.pack(padx=10,pady=10)
+listavoidx=[]
+listavoidy=[]
+ob1=10
 class obstacle:
     def __init__(self, x1, y1, sizex,sizey): 
         global size0
@@ -48,3 +54,4 @@ class obstacle:
         listavoidx.append ( self.x1)
         listavoidy.append ( self.y1)
         self.shape = canvas.create_rectangle(self.x1, self.y1, self.xEnd, self.yEnd, fill='grey') 
+window.mainloop() 
