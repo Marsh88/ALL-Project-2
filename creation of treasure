@@ -1,0 +1,15 @@
+class treasure(robot):
+    def __init__ (self, x0,y0,size=4):
+        self.x0=x0
+        self.size=size
+        self.y0=y0
+
+    
+    def createtreasure(self):
+        rv=random.randint(0,l1)
+        tx1=listavoidx[rv]
+        ty1=listavoidy[rv]
+        print tx1
+        print ty1
+        tr1=canvas.create_oval(tx1,ty1,tx1+15,ty1+15,fill='gold')
+        
