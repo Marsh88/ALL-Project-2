@@ -116,15 +116,32 @@ class treasure(object1):
 
         self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
         self.canvas.update()
+        
+    def changetreasure(self):
+        if abs(self.x01)<20 and abs(self.y01)<20:
+            rv=random.randint(0,self.l1)
+            self.tx1=listavoidx[rv]
+            self.ty1=listavoidy[rv]
+            canvas.delete(self.tr1)
+            self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
+            canvas.update()
+
+    def score2(self):
+        global score
+        if abs(self.x01)<20 and abs(self.y01)<20:
+            score+=1
+        score1.config(text="the amount of tiems the treasure has be found is %s" %(score))
+        score1.pack()
 
 try1=treasure()
 try1.drawRobot(canvas)
-for i in range (10):
+for i in range (12):
     try1.drawObstacle(canvas)
 try1.createtreasure(canvas)
-
-for i in range (500):
+for i in range (750):
     try1.roam()
+    try1.changetreasure()
+    try1.score2()
     time.sleep(0.1)
 
 window.mainloop() 
