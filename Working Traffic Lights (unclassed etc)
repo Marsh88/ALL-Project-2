@@ -1,0 +1,59 @@
+import time
+# Get TKinter ready to go
+import random
+from Tkinter import *
+window=Tk()
+window.title("Traffic Light Test")
+canvas = Canvas(window, width=400, height= 300, bg="white")
+canvas.pack(padx=10,pady=10)
+# The velocity, or distance moved per time step
+vx = 10.0 # x velocity
+vy = 5.0 # y velocity
+# Boundaries
+x_min = 0.0
+y_min = 0.0
+x_max = 400.0
+y_max = 300.0
+idl=canvas.create_rectangle(12,250,12+7,250+7)
+
+Obx1=1
+Oby1=2
+Obx2=2
+Oby2=1
+i=0
+# Move robot for 100 timesteps
+for t in range(1, 100):
+    x1,y1,x2,y2=canvas.coords(idl)
+    i=i+1
+    #this creates a red circle at intervals and each time one is created, the code stops and it changes to a green light then the robots move again.
+    if i==25 or i==75:
+        Obx1=x1+20
+        Oby1=y1+20
+        Obx2=x1+50
+        Oby2=y2-20
+        OR=canvas.create_oval(x1+20,y1+20,x1+50,y2-20, fill='red')
+        canvas.update()
+        time.sleep(2)
+        canvas.delete(OR)
+        OG=canvas.create_oval(Obx1,Oby1,Obx2,Oby2, fill='green')
+        canvas.update()
+        time.sleep(0.5)
+        canvas.delete(OG)
+        vx=5
+        vy=-10
+    # If a boundary has been crossed, reverse the direction    
+    if x1 >= x_max:
+         vx = -10.0
+    if y1 <= y_min:
+         vy = 5.0
+    if y2 >= y_max:
+         vy = -5.0
+    if x1 <= x_min:
+        vx = 10.0
+    # Move robot a fixed amount
+    canvas.coords(idl,x1+vx,y1+vy,x2+vx,y2+vy)
+    canvas.update()
+    # Pause for 0.1 seconds, then delete the image
+    time.sleep(0.1)
+    
+window.mainloop()
