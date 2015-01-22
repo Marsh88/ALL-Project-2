@@ -1,0 +1,25 @@
+# Putting a gif image on a canvas with Tkinter
+
+from Tkinter import *
+
+# create the canvas
+
+canvas = Canvas(width = 300, height = 200, bg = 'yellow')
+
+# pack the canvas into a frame/form
+
+canvas.pack(expand = YES, fill = BOTH)
+
+# load the .gif image file
+# put in your own gif file here, may need to add full path
+# like 'C:/Users/(User_Name)/Documents/hey.gif' for windows
+# or '~/Documents/hey.gif' for mac.
+
+gif1 = PhotoImage(file = '~/Documents/Camera Uploads/hey.gif')
+
+# put gif image on canvas
+# pic's upper left corner (NW) on the canvas is at x=0 y=0
+
+canvas.create_image(0, 0, image = gif1, anchor = NW)
+
+mainloop()
