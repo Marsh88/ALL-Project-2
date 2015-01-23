@@ -1,0 +1,119 @@
+from tkinter import *
+import time
+window = Tk()
+canvas = Canvas(window, width=1000, height=500, bg='white')
+canvas.pack(padx=10,pady=10)
+
+
+class robot:
+    def __init__(self,x,y, x1, y1, speed=1.0, size=4, colour='red'):
+        
+        self.vx = 5.0
+        self.vy = 2.5
+        self.x = x
+        self.y = y
+        self.speed = speed
+        self.size = size
+        self.x1 = self.x + self.size
+        self.y1 = self.y + self.size
+
+        self.colour = colour
+  
+
+    def roam (self):
+        self.collison()
+        self.traffic()
+
+        self.x += self.vx
+        self.y += self.vy
+        self.x1 = self.x + self.size
+        self.y1 = self.y + self.size
+
+
+        self.canvas.coords(self.shape, self.x, self.y, self.x + self.size, self.y + self.size)
+        self.canvas.update()
+
+    def boundries(self, vx, vy, x_min, y_min, x_max, y_max):
+
+        self.vx = vx
+        self.vy = vy
+
+        
+        self.x_min = x_min
+        self.y_min = y_min
+        self.x_max = x_max 
+        self.y_max = y_max
+
+             
+    def drawrobot(self, canvas):
+        self.canvas = canvas
+        self.shape = canvas.create_rectangle(self.x, self.y, self.x + self.size, self.y + self.size, fill=self.colour)
+        
+
+    def collison(self):
+        if self.x1 >= self.x_max:
+            self.vx = -10.0
+            
+        if self.y <= self.y_min:
+            self.vy = 5.0
+            
+        if self.y1 >= self.y_max:
+            self.vy = -5.0
+            
+        if self.x <= self.x_min:
+            self.vx = 10.0
+ 
+    def traffic(self):
+        self.i = i
+        
+          
+        if self.i==250 or self.i==500 or self.i==750:
+            self.OR = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='red')
+            self.canvas.update()
+            self.vx=0
+            self.vy=0
+        if self.i==270 or self.i==520 or self.i==770:
+            self.canvas.delete(self.OR)
+            self.OG = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='green')
+            self.canvas.update()
+            self.vx=5
+            self.vy=-5
+        if self.i==272 or self.i==522 or self.i==772:
+            self.canvas.delete(self.OG)
+
+       
+            
+            
+            
+        
+
+
+
+i = 0
+
+r2d2 = robot(150, 150,0,0, speed = 1, size= 30, colour = 'red')
+r2d2.drawrobot(canvas)
+
+r2d2.traffic()
+x_min = 0.0
+y_min = 0.0
+x_max = 1000.0
+y_max = 500.0
+
+vx = 10.0
+vy = 5.0
+
+r2d2.boundries(vx, vy, x_min, y_min, x_max, y_max) 
+
+
+
+
+for t in range(1,1000):
+    x,y,x1,y1=canvas.coords(r2d2.shape)
+    canvas.update()  
+    r2d2.roam()
+    i=i+1
+    time.sleep(0.1)
+    
+                 
+window.mainloop()
