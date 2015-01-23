@@ -21,6 +21,7 @@ class robot:
   
 #creates roam function that allows robot object to roam around the canvas
     def roam (self):
+    #"self.collison()" implements the collison function
         self.collison()
         self.x += self.vx
         self.y += self.vy
