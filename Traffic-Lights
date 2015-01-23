@@ -62,7 +62,7 @@ class robot:
             
         if self.x <= self.x_min:
             self.vx = 10.0
- 
+ #traffic light function 
     def traffic(self):
         self.i = i
         
