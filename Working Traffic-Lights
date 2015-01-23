@@ -22,6 +22,7 @@ class robot:
 
     def roam (self):
         self.collison()
+        #Implements traffic function
         self.traffic()
 
         self.x += self.vx
@@ -62,7 +63,7 @@ class robot:
             
         if self.x <= self.x_min:
             self.vx = 10.0
-
+#traffic function
     def traffic(self):
         self.i = i
         
@@ -93,7 +94,7 @@ i = 0
 
 r2d2 = robot(150, 150,0,0, speed = 1, size= 30, colour = 'red')
 r2d2.drawrobot(canvas)
-r2d2.traffic()
+
 x_min = 0.0
 y_min = 0.0
 x_max = 1000.0
