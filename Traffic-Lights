@@ -74,11 +74,17 @@ class robot:
             self.vy=0
         if self.i==270 or self.i==520 or self.i==770:
             self.canvas.delete(self.OR)
+            self.OA = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='yellow')
+            self.canvas.update()
+            self.vx=0
+            self.vy=0
+        if self.i==280 or self.i==530 or self.i==780:
+            self.canvas.delete(self.OA)
             self.OG = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='green')
             self.canvas.update()
             self.vx=5
             self.vy=-5
-        if self.i==272 or self.i==522 or self.i==772:
+        if self.i==282 or self.i==532 or self.i==782:
             self.canvas.delete(self.OG)
 
        
