@@ -1,6 +1,19 @@
-# Putting a gif image on a canvas with Tkinter
+# Putting a gif image from a URL on a canvas
 
 from Tkinter import *
+
+import Tkinter as tk
+root = tk.Tk()
+
+import urllib
+URL = "http://www.firstsafetysigns.co.uk/WebRoot/BT2/Shops/Store2_002E_Shop1848/45ED/D037/F3AE/1DCC/448D/AC10/3D2A/40FB/Test-in-progress.gif"
+u = urllib.urlopen(URL)
+raw_data = u.read()
+u.close()
+
+import base64
+b64_data = base64.encodestring(raw_data)
+gif1 = tk.PhotoImage(data=b64_data)
 
 # create the canvas
 
@@ -9,13 +22,6 @@ canvas = Canvas(width = 300, height = 200, bg = 'yellow')
 # pack the canvas into a frame/form
 
 canvas.pack(expand = YES, fill = BOTH)
-
-# load the .gif image file
-# put in your own gif file here, may need to add full path
-# like 'C:/Users/(User_Name)/Documents/hey.gif' for windows
-# or '~/Documents/hey.gif' for mac.
-
-gif1 = PhotoImage(file = '~/Documents/Camera Uploads/hey.gif')
 
 # put gif image on canvas
 # pic's upper left corner (NW) on the canvas is at x=0 y=0
