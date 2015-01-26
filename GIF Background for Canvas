@@ -1,9 +1,12 @@
 # Putting a gif image from a URL on a canvas
+# Get TKinter ready to go
 
 from Tkinter import *
-
 import Tkinter as tk
+
 root = tk.Tk()
+
+# Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
 
 import urllib
 URL = "https://lh4.googleusercontent.com/XbYGguteht8fJL1nrIZ5MteDYaEmx6ARjaX5TzcGBMdeZ9OYLiTBpX93haTbxEHxEpVgCvE2ias=w1896-h816"
@@ -15,17 +18,19 @@ import base64
 b64_data = base64.encodestring(raw_data)
 gif1 = tk.PhotoImage(data=b64_data)
 
-# create the canvas
+# Create the canvas
 
 canvas = Canvas(width = 500, height = 400, bg = 'white')
 
-# pack the canvas into a frame/form
+# Pack the canvas into a frame/form
 
 canvas.pack(expand = YES, fill = BOTH)
 
-# put gif image on canvas
-# pic's upper left corner (NW) on the canvas is at x=0 y=0
+# Put gif image on canvas
+# The gif image's upper left corner on the canvas is at x=0 y=0
 
 canvas.create_image(0, 0, image = gif1, anchor = NW)
+
+# Run the code
 
 mainloop()
