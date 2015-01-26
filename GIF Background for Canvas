@@ -9,7 +9,7 @@ root = tk.Tk()
 # Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
 
 import urllib
-URL = "https://lh4.googleusercontent.com/XbYGguteht8fJL1nrIZ5MteDYaEmx6ARjaX5TzcGBMdeZ9OYLiTBpX93haTbxEHxEpVgCvE2ias=w1896-h816"
+URL = "https://djaspermorris.files.wordpress.com/2015/01/rsz_deal_with_it_mk2.gif"
 u = urllib.urlopen(URL)
 raw_data = u.read()
 u.close()
