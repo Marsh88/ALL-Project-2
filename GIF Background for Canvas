@@ -6,7 +6,7 @@ import Tkinter as tk
 root = tk.Tk()
 
 import urllib
-URL = "http://www.firstsafetysigns.co.uk/WebRoot/BT2/Shops/Store2_002E_Shop1848/45ED/D037/F3AE/1DCC/448D/AC10/3D2A/40FB/Test-in-progress.gif"
+URL = "https://lh4.googleusercontent.com/XbYGguteht8fJL1nrIZ5MteDYaEmx6ARjaX5TzcGBMdeZ9OYLiTBpX93haTbxEHxEpVgCvE2ias=w1896-h816"
 u = urllib.urlopen(URL)
 raw_data = u.read()
 u.close()
@@ -17,7 +17,7 @@ gif1 = tk.PhotoImage(data=b64_data)
 
 # create the canvas
 
-canvas = Canvas(width = 300, height = 200, bg = 'yellow')
+canvas = Canvas(width = 500, height = 400, bg = 'white')
 
 # pack the canvas into a frame/form
 
