@@ -1,0 +1,38 @@
+class robot:
+
+    def roam(self):
+        x01=tx1-self.x0
+        if x01>0: 
+            y01=ty1-self.y0 #Difference between robot and treasure in y axis is equal to the treasure variable minus robot location
+            if y01<0:
+                hyp1=math.sqrt(x01**2+y01**2) #Using pythagoras' theorem
+                ang1=math.acos(abs(x01)/hyp1) #finds the angle at which the robot will move
+                lg1=hyp1/5 #represents a suitable amount that the robot will move by making the moving distance smaller
+                movx1=(hyp1/lg1*math.cos(ang1)) #robot moving in x axis
+                movy1=-(hyp1/lg1*(math.cos(90-ang1))) #robot moving in y axis
+            if y01>0:
+                hyp1=math.sqrt(x01**2+y01**2) 
+                ang1=math.acos(abs(x01)/hyp1) 
+                lg1=hyp1/5
+                movx1=(hyp1/lg1*math.cos(ang1)) 
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+        if x01<0: 
+            y01=ty1-self.y0
+            if y01<0:
+                hyp1=math.sqrt(x01**2+y01**2)
+                ang1=math.acos(abs(x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                movy1=-(hyp1/lg1*(math.cos(90-ang1)))
+            if y01>0:
+                hyp1=math.sqrt(x01**2+y01**2)
+                ang1=math.acos(abs(x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+        self.x0+=movx1
+        self.y0+=movy1
+        x0=self.x0
+        y0=self.y0
+        self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.size, self.y0 + self.size) 
+        self.canvas.update()
