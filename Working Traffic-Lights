@@ -1,4 +1,4 @@
-from tkinter import *
+from Tkinter import *
 import time
 window = Tk()
 canvas = Canvas(window, width=1000, height=500, bg='white')
