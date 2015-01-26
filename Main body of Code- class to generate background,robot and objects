@@ -115,6 +115,47 @@ class treasure(object1):
                 movx1=-(hyp1/lg1*math.cos(ang1))
                 movy1=(hyp1/lg1*math.cos(90-ang1))
             
+            for m in range(self.l1+1):
+                ox1=listavoidx[m]-(self.x0-15)
+                oy1=listavoidy[m]-(self.y0-15)
+                od1=math.sqrt(ox1**2+oy1**2)
+                if od1<20:
+                    if ox1>0:
+                        if oy1>0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=-2
+                                if movy1>movx1:
+                                    movx1=-10
+                                    movy1=-2
+                        if oy1<0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=10
+                                    movx1=-2
+                                if movy1>movx1:
+                                    movx1=-10
+                                    movy1=2
+                    if ox1<0:
+                        if oy1>0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=2
+                                if movy1>movx1:
+                                    movx1=10
+                                    movy1=-2                
+                        if oy1<0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=2
+                                if movy1>movx1:
+                                    movx1=10
+                                    movy1=2                
+
+            
         self.x0+=movx1
         self.y0+=movy1
 
