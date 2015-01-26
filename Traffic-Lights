@@ -63,29 +63,20 @@ class robot:
         if self.x <= self.x_min:
             self.vx = 10.0
  #traffic light function 
-    def traffic(self):
-        self.i = i
-        
-          
-        if self.i==250 or self.i==500 or self.i==750:
-            self.OR = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='red')
-            self.canvas.update()
-            self.vx=0
-            self.vy=0
-        if self.i==270 or self.i==520 or self.i==770:
-            self.canvas.delete(self.OR)
-            self.OA = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='yellow')
-            self.canvas.update()
-            self.vx=0
-            self.vy=0
-        if self.i==280 or self.i==530 or self.i==780:
-            self.canvas.delete(self.OA)
-            self.OG = canvas.create_oval(x+20,y+20,x+50,y1-20, fill='green')
-            self.canvas.update()
-            self.vx=5
-            self.vy=-5
-        if self.i==282 or self.i==532 or self.i==782:
-            self.canvas.delete(self.OG)
+    def traffic(self): 
+                if i==250 or i==500 or i==750:
+                    self.OR = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='red')
+                    self.canvas.update()
+                    time.sleep(1)
+                    self.canvas.delete(self.OR)
+                    self.OA = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='yellow')
+                    self.canvas.update()
+                    time.sleep(1)
+                    self.canvas.delete(self.OA)
+                    self.OG = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='green')
+                    self.canvas.update()
+                    time.sleep(0.5)
+                    self.canvas.delete(self.OG)
 
        
             
