@@ -84,9 +84,16 @@ class treasure(object1):
         self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
         return (self.tr1)
 
+    def listavoid(self):
+        global listavoidx1
+        global listavoidy1
+        listavoidx1=listavoidx[:]
+        listavoidy1=listavoidy[:]
 
     def roam(self):
         l4=len(listavoidx1)
+        print listavoidx1
+        print listavoidx
         ob=0
         large=0
         while listavoidx1[l4-1] != listavoidx1[large+ob] :
@@ -100,9 +107,7 @@ class treasure(object1):
             od01=math.sqrt(ox01**2+oy01**2)
             if  od0>od01:
                 large=large+ob
-                ob=1
-
-        
+                ob=1        
             else:
                 ob=ob+1
         
@@ -138,6 +143,7 @@ class treasure(object1):
                 movx1=-(hyp1/lg1*math.cos(ang1))
                 movy1=(hyp1/lg1*math.cos(90-ang1))
 
+        
         for m in range(self.l1):
             ox1=(listavoidx[m]+15)-(self.x0)
             oy1=(listavoidy[m]+15)-(self.y0)
@@ -146,41 +152,48 @@ class treasure(object1):
                 for b in range(3):
                     if ox1>0:
                         if oy1>0:
-                            if movx1>movy1:
-                                movy1=-5
-                                movx1=-5
-                            if movy1>movx1:
-                                movx1=-5
-                                movy1=-5
+                            for b in range(2):
+                                movy1=-4
+                                movx1=-4
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+
                         if oy1<0:
-                            if movx1>movy1:
-                                movy1=5
-                                movx1=-5
-                            if movy1>movx1:
-                                movx1=-5
-                                movy1=5
+                            for b in range(2):
+                                movy1=4
+                                movx1=-4
+
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
                     if ox1<0:
                         if oy1>0:
-                            if movx1>movy1:
-                                movy1=-5
-                                movx1=5
-                            if movy1>movx1:
-                                movx1=5
-                                movy1=-5              
+                            for b in range(2):
+                                movy1=-4
+                                movx1=4
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
                         if oy1<0:
-                            if movx1>movy1:
-                                movy1=-5
-                                movx1=5
-                            if movy1>movx1:
-                                movx1=5
-                                movy1=5
-                    self.x0+=movx1
-                    self.y0+=movy1
-                    self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
-                    self.canvas.update()
+                            for b in range(2):
+                                movy1=-4
+                                movx1=4
+                                self.x0+=movx1
+                                self.y0+=movy1
+                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                                self.canvas.update()
+                                time.sleep(0.1)
+
        
 
-        if math.sqrt((ox0)**2+(oy0)**2)<25:
+        if math.sqrt((ox0)**2+(oy0)**2)<27:
             listavoidx1.remove(odx1)
             listavoidy1.remove(ody1)
 
@@ -210,34 +223,40 @@ class treasure(object1):
 
     def changetreasure(self):
         global score
-        if abs(self.x0-self.tx1)<27 and abs(self.y0+-self.ty1)<27:
+        global listavoidx1
+        global listavoidy1
+        dis1=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
+        if dis1<35:
             rv=random.randint(0,self.l1)
+            del listavoidx1[:]
+            del listavoidy1[:]
             self.tx1=listavoidx[rv]
             self.ty1=listavoidy[rv]
             canvas.delete(self.tr1)
             self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
             canvas.update()
             score+=1
-            listavoidx1=list(listavoidx)
-            listavoidy1=list(listavoidy)
-            time.sleep(3)
+            listavoidx1=copy.copy(listavoidx)
+            listavoidy1=copy.copy(listavoidy)
+            time.sleep(1)
 
     def score2(self):
         global score
         d1t=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
         score1.config(text="the amount of times the treasure has be found is %s" %(score))
         score1.pack()
+
 try1=treasure()
 try1.drawRobot(canvas)
 for h in range (12):
     try1.drawObstacle(canvas)
-listavoidx1=listavoidx[:]
-listavoidy1=listavoidy[:]
 try1.createtreasure(canvas)
-
+listavoidx1=list(listavoidx)
+listavoidy1=list(listavoidy)
+try1.listavoid
 for i in range (1000):
-    try1.changetreasure()
     try1.roam()
+    try1.changetreasure()
     try1.traffic()
     try1.score2()
     time.sleep(0.1)
