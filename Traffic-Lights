@@ -63,20 +63,24 @@ class robot:
         if self.x <= self.x_min:
             self.vx = 10.0
  #traffic light function 
-    def traffic(self): 
+    def traffic(self):
+                #if "i" reaches 250, 500 or 750 then the code below will run
                 if i==250 or i==500 or i==750:
+                 #creates a red oval located near where the robot currntley is
                     self.OR = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='red')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OR)
+                    self.canvas.update()#updates canvas
+                    time.sleep(1)#stops the code for 1 second
+                    self.canvas.delete(self.OR)#deletes red oval off the canvas
+                     #creates a yellow oval located near where the robot currntley is
                     self.OA = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='yellow')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OA)
+                    self.canvas.update()#updates canvas
+                    time.sleep(1)#stops the code for 1 second
+                    self.canvas.delete(self.OA)#deletes yellow oval off the canvas
+                     #creates a green oval located near where the robot currntley is
                     self.OG = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='green')
-                    self.canvas.update()
-                    time.sleep(0.5)
-                    self.canvas.delete(self.OG)
+                    self.canvas.update()#updates canvas
+                    time.sleep(0.5)#stops the code for 0.5 second
+                    self.canvas.delete(self.OG)#deletes green oval off the canvas
 
        
             
