@@ -1,4 +1,4 @@
-from tkinter import *
+from Tkinter import *
 import time
 window = Tk()
 canvas = Canvas(window, width=1000, height=500, bg='white')
@@ -67,7 +67,7 @@ class robot:
                 #if "i" reaches 250, 500 or 750 then the code below will run
                 if i==250 or i==500 or i==750:
                 
-                 #creates a red oval located near where the robot currntley is
+                 #creates a red oval located near where the robot currentley is
                     self.OR = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='red')
                     
                     self.canvas.update()#updates canvas
@@ -75,14 +75,14 @@ class robot:
                     
                     self.canvas.delete(self.OR)#deletes red oval off the canvas
                     
-                     #creates a yellow oval located near where the robot currntley is
+                     #creates a yellow oval located near where the robot currentley is
                     self.OA = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='yellow')
                     
                     self.canvas.update()#updates canvas
                     time.sleep(1)#stops the code for 1 second
                     self.canvas.delete(self.OA)#deletes yellow oval off the canvas
                     
-                     #creates a green oval located near where the robot currntley is
+                     #creates a green oval located near where the robot currentley is
                     self.OG = canvas.create_oval(self.x0+20,self.y0+20,self.x0+40,self.y0-20, fill='green')
                     
                     self.canvas.update()#updates canvas
