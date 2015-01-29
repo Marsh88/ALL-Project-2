@@ -1,7 +1,7 @@
 from Tkinter import *
 import time
 window = Tk()
-canvas = Canvas(window, width=1000, height=500, bg='white')
+canvas = Canvas(window, width=500, height=400, bg='white')
 canvas.pack(padx=10,pady=10)
 
 
@@ -105,8 +105,8 @@ r2d2.drawrobot(canvas)
 r2d2.traffic()
 x_min = 0.0
 y_min = 0.0
-x_max = 1000.0
-y_max = 500.0
+x_max = 500.0
+y_max = 400.0
 
 vx = 10.0
 vy = 5.0
