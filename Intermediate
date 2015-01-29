@@ -12,36 +12,39 @@ ob1=1
 score=0
 score1=Label(window, text="the amount of times the treasure has be found is %s" %(score))
 class object1:
-    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='blue'):
-        self.x0=x0
-        self.y0=y0
-        self.sizex=sizex
-        self.sizey=sizey
+    def __init__(self,x02=random.randint(15,400),y02=random.randint(150,475),sizex1=30,sizey1=30,colour='blue'):
+        self.x02=x02
+        self.y02=y02
+        self.sizex1=sizex1
+        self.sizey1=sizey1
         self.colour=colour
 
 
 
     def drawObstacle(self, canvas):
-        self.l1=len(listavoidx)
-        self.l2=len(listavoidy)
-        self.l3=0
-        self.sizex1=30
-        self.sizey1=30
+        l1=len(listavoidx)
+        l2=len(listavoidy)
+        self.sizex1=random.randint(20,30)
+        self.sizey1=random.randint(20,30)
         self.x02=random.randint(15,400)
         self.y02=random.randint(150,475)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
-        while self.l3<50:
+
+
+        self.xEnd=self.sizex1+self.x02
+        self.yEnd=self.sizey1+self.y02
+        if l1>=1 and l1<h:
             l=0
-            while l<self.l1:
-                if listavoidx[l]-self.xEnd<=self.sizex :
-                    if self.x02>listavoidx[l]:
+            while l<l1:
+                if abs(self.x02-listavoidx[l])<=self.sizex1 :
+                    if self.x02>listavoidx[l+1]:
                         self.x02=50+self.x02
                         self.xEnd=50+self.xEnd
                     else:
                         self.x02=self.x02-50
                         self.xEnd= self.xEnd-50
-                if listavoidy[l]-self.yEnd <=self.sizey:
+                if abs(self.y02-listavoidy[l]) <=self.sizey1:
                     if self.y02<=listavoidy[l]:
                         self.y02=self.y02-50
                         self.yEnd=self.yEnd-50
@@ -49,23 +52,21 @@ class object1:
                         self.y02=self.y02+50
                         self.yEnd=self.yEnd +50
                 if self.x02<0:
-                        self.x02=(50+self.sizex)+self.x0
-                        self.xEnd=(50+self.sizex)+self.xEnd                
+                        self.x02=(50+self.sizex1)+self.x02
+                        self.xEnd=(50+self.sizex1)+self.xEnd                
                 if self.xEnd>450:
-                        self.x02=self.x02-(50+self.sizex)
-                        self.xEnd=self.xEnd-(50+self.sizex)
+                        self.x02=self.x02-(50+self.sizex1)
+                        self.xEnd=self.xEnd-(50+self.sizex1)
                 if self.y02<0:
-                        self.y02=(50+self.sizey)+self.y02
-                        self.xEnd=(50+self.sizey)+self.xEnd
+                        self.y02=(50+self.sizey1)+self.y02
+                        self.xEnd=(50+self.sizey1)+self.xEnd
                 if self.yEnd>350:
-                        self.y02=self.y02-(50+self.sizey)  
-                        self.yEnd=self.yEnd-(50+self.sizey)  
-                l+=1
-            self.l3+=1        
+                        self.y02=self.y02-(50+self.sizey1)  
+                        self.yEnd=self.yEnd-(50+self.sizey1)  
+                l+=1      
         listavoidx.append (self.x02)
         listavoidy.append (self.y02)
         self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='grey')
-        return(self.l1)
 
 class robot(object1):
     def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='blue'):
@@ -81,11 +82,9 @@ class robot(object1):
 
     def roam(self):
         l4=len(listavoidx1)
-        print listavoidx1
-        print listavoidx
         ob=0
         large=0
-        while listavoidx1[l4-1] != listavoidx1[large+ob] :
+        while l4-1 != large+ob :
             odx1=listavoidx1[large]
             ody1=listavoidy1[large]
             ox0=(odx1+15)-self.x0
@@ -99,8 +98,8 @@ class robot(object1):
                 ob=1        
             else:
                 ob=ob+1
-        
-            
+
+           
         self.x01=ox0
         if self.x01>0: 
             self.y01=oy0
@@ -133,7 +132,7 @@ class robot(object1):
                 movy1=(hyp1/lg1*math.cos(90-ang1))
 
         
-        for m in range(self.l1):
+        for m in range(len(listavoidx)):
             ox1=(listavoidx[m]+15)-(self.x0)
             oy1=(listavoidy[m]+15)-(self.y0)
             od1=math.sqrt(ox1**2+oy1**2)
@@ -204,7 +203,7 @@ class treasure(robot):
         self.colour=colour
         
     def createtreasure(self,canvas):
-        rv=random.randint(0,self.l1)
+        rv=random.randint(0,len(listavoidx)-1)
         self.tx1=listavoidx[rv]
         self.ty1=listavoidy[rv]
         self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
@@ -214,27 +213,27 @@ class treasure(robot):
       
 
     def traffic(self): 
-                if i==250 or i==500 or i==750:
-                    self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OR)
-                    self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OA)
-                    self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
-                    self.canvas.update()
-                    time.sleep(0.5)
-                    self.canvas.delete(self.OG)
+        if i==250 or i==500 or i==750:
+            self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OR)
+            self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OA)
+            self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
+            self.canvas.update()
+            time.sleep(0.5)
+            self.canvas.delete(self.OG)
 
     def changetreasure(self):
         global score
         global listavoidx1
         global listavoidy1
-        dis1=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
+        dis1=math.sqrt(((self.x0+15)-self.tx1)**2+((self.y0+15)-self.ty1)**2)
         if dis1<30:
-            rv=random.randint(0,self.l1)
+            rv=random.randint(0,len(listavoidx))
             del listavoidx1[:]
             del listavoidy1[:]
             self.tx1=listavoidx[rv]
@@ -254,9 +253,10 @@ class treasure(robot):
         score1.pack()
 
 try1=treasure()
+obje1=object1()
 try1.drawRobot(canvas)
 for h in range (12):
-    try1.drawObstacle(canvas)
+    obje1.drawObstacle(canvas)
 try1.createtreasure(canvas)
 listavoidx1=list(listavoidx)
 listavoidy1=list(listavoidy)
