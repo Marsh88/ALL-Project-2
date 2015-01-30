@@ -12,7 +12,7 @@ ob1=1
 score=0
 score1=Label(window, text="the amount of times the treasure has be found is %s" %(score))
 class object1:
-    def __init__(self,x02=random.randint(15,400),y02=random.randint(150,475),sizex1=30,sizey1=30,colour='blue'):
+    def __init__(self,x02=random.randint(150,400),y02=random.randint(150,475),sizex1=30,sizey1=30,colour='blue'):
         self.x02=x02
         self.y02=y02
         self.sizex1=sizex1
@@ -26,44 +26,41 @@ class object1:
         l2=len(listavoidy)
         self.sizex1=30
         self.sizey1=30
-        self.x02=random.randint(15,400)
+        self.x02=random.randint(150,375)
         self.y02=random.randint(150,475)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
-
-
-        self.xEnd=self.sizex1+self.x02
-        self.yEnd=self.sizey1+self.y02
-        if l1>=1 and l1<h:
-            l=0
-            while l<l1:
-                if abs(self.x02-listavoidx[l])<=self.sizex1 :
-                    if self.x02>listavoidx[l+1]:
-                        self.x02=60+self.x02
-                        self.xEnd=60+self.xEnd
-                    else:
-                        self.x02=self.x02-60
-                        self.xEnd= self.xEnd-60
-                if abs(self.y02-listavoidy[l]) <=self.sizey1:
-                    if self.y02<=listavoidy[l]:
-                        self.y02=self.y02-60
-                        self.yEnd=self.yEnd-60
-                    else:
-                        self.y02=self.y02+60
-                        self.yEnd=self.yEnd +60
-                if self.x02<0:
-                        self.x02=(60+self.sizex1)+self.x02
-                        self.xEnd=(60+self.sizex1)+self.xEnd                
-                if self.xEnd>450:
-                        self.x02=self.x02-(60+self.sizex1)
-                        self.xEnd=self.xEnd-(60+self.sizex1)
-                if self.y02<0:
-                        self.y02=(60+self.sizey1)+self.y02
-                        self.xEnd=(60+self.sizey1)+self.xEnd
-                if self.yEnd>350:
-                        self.y02=self.y02-(60+self.sizey1)  
-                        self.yEnd=self.yEnd-(60+self.sizey1)  
-                l+=1      
+        l=0
+        print l1
+        while l<l1:
+            if abs(self.x02-listavoidx[l])<=self.sizex1 :
+                if self.x02>listavoidx[l]:
+                    self.x02=60+self.x02
+                    self.xEnd=60+self.xEnd
+                else:
+                    self.x02=self.x02-60
+                    self.xEnd= self.xEnd-60
+            if abs(self.y02-listavoidy[l]) <=self.sizey1:
+                if self.y02<=listavoidy[l]:
+                    self.y02=self.y02-60
+                    self.yEnd=self.yEnd-60
+                else:
+                    self.y02=self.y02+60
+                    self.yEnd=self.yEnd +60
+            print self.x02
+            if self.x02<=0:
+                self.x02=(60+self.sizex1)+self.x02
+                self.xEnd=(60+self.sizex1)+self.xEnd                
+            if self.xEnd>=450:
+                self.x02=self.x02-(60+self.sizex1)
+                self.xEnd=self.xEnd-(60+self.sizex1)
+            if self.y02<=0:
+                self.y02=(60+self.sizey1)+self.y02
+                self.xEnd=(60+self.sizey1)+self.xEnd
+            if self.yEnd>=350:
+                self.y02=self.y02-(60+self.sizey1)  
+                self.yEnd=self.yEnd-(60+self.sizey1)  
+            l+=1      
         listavoidx.append (self.x02)
         listavoidy.append (self.y02)
         self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='grey')
@@ -137,59 +134,76 @@ class robot(object1):
             oy1=(listavoidy[m]+15)-(self.y0)
             od1=math.sqrt(ox1**2+oy1**2)
             if od1<20:
-                for b in range(2):
-                    if ox1>0:
-                        if oy1>0:
-                            for b in range(2):
-                                movy1=-random.randint(4,6)
-                                movx1=-random.randint(4,6)
-                                self.x0+=movx1
-                                self.y0+=movy1
-                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
-                                self.canvas.update()
-                                time.sleep(0.1)
+                 if ox1>0:
+                    if oy1>0:
+                        for t in range (2):
+                            movy1=-random.randint(4,8)
+                            self.y0+=movy1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)                        
+                        for b in range(2):
+                            movx1=-random.randint(4,8)
+                            self.x0+=movx1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
 
-                        if oy1<0:
-                            for b in range(2):
-                                movy1=random.randint(4,6)
-                                movx1=-random.randint(4,6)
+                    if oy1<0:
+                        for t in range (2):
+                            movy1=random.randint(4,8)
+                            self.y0+=movy1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
+                        for b in range(2):
+                            movx1=-random.randint(4,8)
+                            self.x0+=movx1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
 
-                                self.x0+=movx1
-                                self.y0+=movy1
-                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
-                                self.canvas.update()
-                                time.sleep(0.1)
-                    if ox1<0:
-                        if oy1>0:
-                            for b in range(2):
-                                movy1=-random.randint(4,6)
-                                movx1=random.randint(4,6)
-                                self.x0+=movx1
-                                self.y0+=movy1
-                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
-                                self.canvas.update()
-                                time.sleep(0.1)
-                        if oy1<0:
-                            for b in range(2):
-                                movy1=random.randint(4,6)
-                                movx1=random.randint(4,6)
-                                self.x0+=movx1
-                                self.y0+=movy1
-                                self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
-                                self.canvas.update()
-                                time.sleep(0.1)
+                 if ox1<0:
+                    if oy1>0:
+                        for t in range (2):
+                            movy1=-random.randint(4,8)
+                            self.y0+=movy1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
+                        for b in range(2):
+                            movx1=random.randint(4,8)
+                            self.x0+=movx1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
+
+                    if oy1<0:
+                        for t in range (2):
+                            movy1=random.randint(4,8)
+                            self.y0+=movy1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
+                        for b in range(2):
+                            movx1=random.randint(4,8)
+                            self.x0+=movx1
+                            self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+                            self.canvas.update()
+                            time.sleep(0.1)
+
 
        
 
-        if math.sqrt((ox0)**2+(oy0)**2)<27:
+        if math.sqrt(ox0**2+oy0**2)<25:
             listavoidx1.remove(odx1)
             listavoidy1.remove(ody1)
 
         self.x0+=movx1
         self.y0+=movy1
-
-        print listavoidx1
         print listavoidx
+        print listavoidx1
+
         self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
         self.canvas.update()
         return(self.x01,self.y01,movx1,movy1)              
@@ -228,11 +242,11 @@ class treasure(robot):
             self.canvas.delete(self.OG)
 
     def changetreasure(self):
-        global score
         global listavoidx1
         global listavoidy1
-        dis1=math.sqrt(((self.x0+15)-self.tx1)**2+((self.y0+15)-self.ty1)**2)
-        if dis1<30:
+        global score
+        dis1=math.sqrt(((self.x0)-self.tx1)**2+((self.y0)-self.ty1)**2)
+        if dis1<25:
             rv=random.randint(0,len(listavoidx))
             del listavoidx1[:]
             del listavoidy1[:]
@@ -247,7 +261,6 @@ class treasure(robot):
             time.sleep(1)
 
     def score2(self):
-        global score
         d1t=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
         score1.config(text="the amount of times the treasure has be found is %s" %(score))
         score1.pack()
@@ -269,4 +282,3 @@ for i in range (1000):
     time.sleep(0.1)
 
 window.mainloop() 
-
