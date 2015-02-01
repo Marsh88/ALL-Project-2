@@ -108,8 +108,6 @@ class robot(object1):
 #the robot's movement code
     def roam(self):
         l4=len(listavoidx1)
-        print listavoidx1
-        print listavoidx
         ob=0
         large=0
         #finds closest object and sets the destination coords as it
@@ -219,8 +217,6 @@ class robot(object1):
 
 
 
-        print listavoidx1
-        print listavoidx
         self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
         self.canvas.update()
         return(self.x01,self.y01,movx1,movy1)              
