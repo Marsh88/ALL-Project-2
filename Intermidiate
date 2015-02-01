@@ -57,41 +57,38 @@ class object1:
         self.sizex1=30
         self.sizey1=30
         self.x02=random.randint(15,400)
-        self.y02=random.randint(150,475)
+        self.y02=random.randint(150,375)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
 #moves the object if they overlap, currently moves around 90% of the objects out of each other
-        while l3<50:
-            l=0
-            while l<self.l1:
-                if listavoidx[l]-self.xEnd<=self.sizex :
-                    if self.x02>listavoidx[l]:
-                        self.x02=30+self.x02
-                        self.xEnd=30+self.xEnd
-                    else:
-                        self.x02=self.x02-30
-                        self.xEnd= self.xEnd-30
-                if listavoidy[l]-self.yEnd <=self.sizey:
-                    if self.y02<=listavoidy[l]:
-                        self.y02=self.y02-30
-                        self.yEnd=self.yEnd-30
-                    else:
-                        self.y02=self.y02+30
-                        self.yEnd=self.yEnd +30
-                if self.x02<25:
-                        self.x02=(30)+self.x0
-                        self.xEnd=(30)+self.xEnd                
-                if self.xEnd>450:
-                        self.x02=self.x02-(30)
-                        self.xEnd=self.xEnd-(30)
-                if self.y02<25:
-                        self.y02=(30)+self.y02
-                        self.xEnd=(30)+self.xEnd
-                if self.yEnd>350:
-                        self.y02=self.y02-30 
-                        self.yEnd=self.yEnd-30  
-                l+=1
-            l3+=1        
+        for l in range( self.l1):
+            if listavoidx[l]-self.xEnd<=self.sizex :
+                if self.x02>listavoidx[l]:
+                    self.x02=30+self.x02
+                    self.xEnd=30+self.xEnd
+                else:
+                    self.x02=self.x02-30
+                    self.xEnd= self.xEnd-30
+            if listavoidy[l]-self.yEnd <=self.sizey:
+                if self.y02<=listavoidy[l]:
+                    self.y02=self.y02-30
+                    self.yEnd=self.yEnd-30
+                else:
+                    self.y02=self.y02+30
+                    self.yEnd=self.yEnd +30
+            if self.x02<25:
+                self.x02=(30)+self.x0
+                self.xEnd=(30)+self.xEnd                
+            if self.xEnd>450:
+                self.x02=self.x02-(30)
+                self.xEnd=self.xEnd-(30)
+            if self.y02<25:
+                self.y02=(30)+self.y02
+                self.xEnd=(30)+self.xEnd
+            if self.yEnd>350:
+                self.y02=self.y02-30 
+                self.yEnd=self.yEnd-30  
+       
         listavoidx.append (self.x02)
         listavoidy.append (self.y02)
         self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='dark green')
@@ -253,7 +250,7 @@ class treasure(robot):
         self.sizey=sizey
         self.colour=colour
     #creates the treasure on top of one of the objects    
-    def createtreasure(self,canvas):
+    def createTreasure(self,canvas):
         rv=random.randint(0,self.l1)
         self.tx1=listavoidx[rv]
         self.ty1=listavoidy[rv]
@@ -264,7 +261,7 @@ class treasure(robot):
       
 
     #when the robot finds the treasure, the treasuer moves to another location and the list of searched objects resets
-    def changetreasure(self):
+    def changeTreasure(self):
         global score
         global listavoidx1
         global listavoidy1
@@ -293,12 +290,12 @@ try1=treasure()
 try1.drawRobot(canvas)
 for h in range (10):
     try1.drawObstacle(canvas)
-try1.createtreasure(canvas)
+try1.createTreasure(canvas)
 listavoidx1=list(listavoidx)
 listavoidy1=list(listavoidy)
 
 for i in range (1000):
-    try1.changetreasure()
+    try1.changeTreasure()
     try1.roam()
     try1.traffic()
     try1.score2()
