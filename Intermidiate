@@ -36,7 +36,8 @@ canvas.pack(expand = YES, fill = BOTH)
 
 canvas.create_image(0, 0, image = gif1, anchor = NW)
 
-# Run the code%(score))
+# Run the code)
+
 
 class object1:
     def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='dark green'):
@@ -170,9 +171,9 @@ class robot(object1):
                 for b in range(2):
                     if ox1>0:
                         if oy1>0:
+                            movy1=-random.randint(6,6)
+                            movx1=-random.randint(-6,6)
                             for b in range(2):
-                                movy1=-random.randint(6,8)
-                                movx1=-random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -180,10 +181,10 @@ class robot(object1):
                                 time.sleep(0.1)
 
                         if oy1<0:
-                            for b in range(2):
-                                movy1=random.randint(6,8)
-                                movx1=-random.randint(6,8)
+                            movy1=random.randint(6,6)
+                            movx1=-random.randint(-6,6)
 
+                            for b in range(2):
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -191,18 +192,18 @@ class robot(object1):
                                 time.sleep(0.1)
                     if ox1<0:
                         if oy1>0:
+                            movy1=-random.randint(6,6)
+                            movx1=random.randint(-6,6)
                             for b in range(2):
-                                movy1=-random.randint(6,8)
-                                movx1=random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
                                 self.canvas.update()
                                 time.sleep(0.1)
                         if oy1<0:
+                            movy1=random.randint(6,6)
+                            movx1=random.randint(-6,6)
                             for b in range(2):
-                                movy1=random.randint(6,8)
-                                movx1=random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -266,7 +267,7 @@ class treasure(robot):
         global listavoidx1
         global listavoidy1
         dis1=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
-        if dis1<25:
+        if dis1<27:
             rv=random.randint(0,self.l1)
             del listavoidx1[:]
             del listavoidy1[:]
