@@ -7,7 +7,6 @@ import base64
 from Tkinter import*
 import Tkinter as tk
 window = Tk() 
-canvas.pack(padx=10,pady=10)
 listavoidx=[]
 listavoidy=[]
 ob1=1
@@ -40,7 +39,7 @@ canvas.create_image(0, 0, image = gif1, anchor = NW)
 # Run the code%(score))
 
 class object1:
-    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='blue'):
+    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='dark green'):
         self.x0=x0
         self.y0=y0
         self.sizex=sizex
@@ -52,14 +51,15 @@ class object1:
     def drawObstacle(self, canvas):
         self.l1=len(listavoidx)
         self.l2=len(listavoidy)
-        self.l3=0
+        l3=0
         self.sizex1=30
         self.sizey1=30
         self.x02=random.randint(15,400)
         self.y02=random.randint(150,475)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
-        while self.l3<50:
+#moves the object if they overlap, currently moves around 90% of the objects out of each other
+        while l3<25:
             l=0
             while l<self.l1:
                 if listavoidx[l]-self.xEnd<=self.sizex :
@@ -76,23 +76,23 @@ class object1:
                     else:
                         self.y02=self.y02+50
                         self.yEnd=self.yEnd +50
-                if self.x02<0:
-                        self.x02=(50+self.sizex)+self.x0
-                        self.xEnd=(50+self.sizex)+self.xEnd                
+                if self.x02<25:
+                        self.x02=(50)+self.x0
+                        self.xEnd=(50)+self.xEnd                
                 if self.xEnd>450:
-                        self.x02=self.x02-(50+self.sizex)
-                        self.xEnd=self.xEnd-(50+self.sizex)
-                if self.y02<0:
-                        self.y02=(50+self.sizey)+self.y02
-                        self.xEnd=(50+self.sizey)+self.xEnd
+                        self.x02=self.x02-(50)
+                        self.xEnd=self.xEnd-(50)
+                if self.y02<25:
+                        self.y02=(50)+self.y02
+                        self.xEnd=(50)+self.xEnd
                 if self.yEnd>350:
-                        self.y02=self.y02-(50+self.sizey)  
-                        self.yEnd=self.yEnd-(50+self.sizey)  
+                        self.y02=self.y02-50 
+                        self.yEnd=self.yEnd-50  
                 l+=1
-            self.l3+=1        
+            l3+=1        
         listavoidx.append (self.x02)
         listavoidy.append (self.y02)
-        self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='grey')
+        self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='dark green')
         return(self.l1)
 
 class robot(object1):
@@ -171,8 +171,8 @@ class robot(object1):
                     if ox1>0:
                         if oy1>0:
                             for b in range(2):
-                                movy1=-random.randint(4,6)
-                                movx1=-random.randint(4,6)
+                                movy1=-random.randint(6,8)
+                                movx1=-random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -181,8 +181,8 @@ class robot(object1):
 
                         if oy1<0:
                             for b in range(2):
-                                movy1=random.randint(4,6)
-                                movx1=-random.randint(4,6)
+                                movy1=random.randint(6,8)
+                                movx1=-random.randint(6,8)
 
                                 self.x0+=movx1
                                 self.y0+=movy1
@@ -192,8 +192,8 @@ class robot(object1):
                     if ox1<0:
                         if oy1>0:
                             for b in range(2):
-                                movy1=-random.randint(4,6)
-                                movx1=random.randint(4,6)
+                                movy1=-random.randint(6,8)
+                                movx1=random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -201,8 +201,8 @@ class robot(object1):
                                 time.sleep(0.1)
                         if oy1<0:
                             for b in range(2):
-                                movy1=random.randint(4,6)
-                                movx1=random.randint(4,6)
+                                movy1=random.randint(6,8)
+                                movx1=random.randint(6,8)
                                 self.x0+=movx1
                                 self.y0+=movy1
                                 self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
@@ -211,22 +211,40 @@ class robot(object1):
 
        
 
-        if math.sqrt((ox0)**2+(oy0)**2)<27:
+        if math.sqrt((ox0)**2+(oy0)**2)<23:
             listavoidx1.remove(odx1)
             listavoidy1.remove(ody1)
 
         self.x0+=movx1
         self.y0+=movy1
+            # the traffic light appears every 250 cycles and stops the code
+
 
         print listavoidx1
         print listavoidx
         self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
         self.canvas.update()
         return(self.x01,self.y01,movx1,movy1)              
-        
+
+    def traffic(self):
+        if i==250 or i==500 or i==750:
+            self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OR)
+            self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
+            self.canvas.update()
+            time.sleep(1)
+            self.canvas.delete(self.OA)
+            self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
+            self.canvas.update()
+            time.sleep(0.5)
+            self.canvas.delete(self.OG)       
+
 class treasure(robot):
-    def __init__(self,x0=random.randint(15,400),y0=0,sizex=4,sizey=4,colour='blue'):
+    def __init__(self,x0=random.randint(50,400),y0=0,sizex=4,sizey=4,colour='blue'):
         self.x0=x0
+        
         self.y0=y0
         self.sizex=sizex
         self.sizey=sizey
@@ -241,28 +259,14 @@ class treasure(robot):
 
 
       
-    # the traffic light appears every 250 cycles and stops the code
-    def traffic(self): 
-                if i==250 or i==500 or i==750:
-                    self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OR)
-                    self.OA = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='yellow')
-                    self.canvas.update()
-                    time.sleep(1)
-                    self.canvas.delete(self.OA)
-                    self.OG = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='green')
-                    self.canvas.update()
-                    time.sleep(0.5)
-                    self.canvas.delete(self.OG)
-    #when the robot finds teh treasure, the treasuer moves to anotehr location and the list of searched objects resets
+
+    #when the robot finds the treasure, the treasuer moves to another location and the list of searched objects resets
     def changetreasure(self):
         global score
         global listavoidx1
         global listavoidy1
         dis1=math.sqrt((self.x0-self.tx1)**2+(self.y0-self.ty1)**2)
-        if dis1<30:
+        if dis1<25:
             rv=random.randint(0,self.l1)
             del listavoidx1[:]
             del listavoidy1[:]
