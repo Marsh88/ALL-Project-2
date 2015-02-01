@@ -56,8 +56,8 @@ class object1:
         l3=0
         self.sizex1=30
         self.sizey1=30
-        self.x02=random.randint(15,400)
-        self.y02=random.randint(150,375)
+        self.x02=random.randint(25,475)
+        self.y02=random.randint(25,375)
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
 #moves the object if they overlap, currently moves around 90% of the objects out of each other
