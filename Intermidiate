@@ -1,3 +1,4 @@
+
 import random
 import time
 import math
@@ -40,11 +41,11 @@ canvas.create_image(0, 0, image = gif1, anchor = NW)
 
 
 class object1:
-    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='dark green'):
+    def __init__(self,x=50,y0=50,sizex=30,sizey=30,colour='dark green'):
         self.x0=x0
         self.y0=y0
-        self.sizex=sizex
-        self.sizey=sizey
+        self.sizex1=sizex
+        self.sizey1=sizey
         self.colour=colour
 
 
@@ -60,35 +61,35 @@ class object1:
         self.xEnd=self.sizex1+self.x02
         self.yEnd=self.sizey1+self.y02
 #moves the object if they overlap, currently moves around 90% of the objects out of each other
-        while l3<25:
+        while l3<50:
             l=0
             while l<self.l1:
                 if listavoidx[l]-self.xEnd<=self.sizex :
                     if self.x02>listavoidx[l]:
-                        self.x02=50+self.x02
-                        self.xEnd=50+self.xEnd
+                        self.x02=30+self.x02
+                        self.xEnd=30+self.xEnd
                     else:
-                        self.x02=self.x02-50
-                        self.xEnd= self.xEnd-50
+                        self.x02=self.x02-30
+                        self.xEnd= self.xEnd-30
                 if listavoidy[l]-self.yEnd <=self.sizey:
                     if self.y02<=listavoidy[l]:
-                        self.y02=self.y02-50
-                        self.yEnd=self.yEnd-50
+                        self.y02=self.y02-30
+                        self.yEnd=self.yEnd-30
                     else:
-                        self.y02=self.y02+50
-                        self.yEnd=self.yEnd +50
+                        self.y02=self.y02+30
+                        self.yEnd=self.yEnd +30
                 if self.x02<25:
-                        self.x02=(50)+self.x0
-                        self.xEnd=(50)+self.xEnd                
+                        self.x02=(30)+self.x0
+                        self.xEnd=(30)+self.xEnd                
                 if self.xEnd>450:
-                        self.x02=self.x02-(50)
-                        self.xEnd=self.xEnd-(50)
+                        self.x02=self.x02-(30)
+                        self.xEnd=self.xEnd-(30)
                 if self.y02<25:
-                        self.y02=(50)+self.y02
-                        self.xEnd=(50)+self.xEnd
+                        self.y02=(30)+self.y02
+                        self.xEnd=(30)+self.xEnd
                 if self.yEnd>350:
-                        self.y02=self.y02-50 
-                        self.yEnd=self.yEnd-50  
+                        self.y02=self.y02-30 
+                        self.yEnd=self.yEnd-30  
                 l+=1
             l3+=1        
         listavoidx.append (self.x02)
@@ -218,7 +219,7 @@ class robot(object1):
 
         self.x0+=movx1
         self.y0+=movy1
-            # the traffic light appears every 250 cycles and stops the code
+
 
 
         print listavoidx1
@@ -227,6 +228,7 @@ class robot(object1):
         self.canvas.update()
         return(self.x01,self.y01,movx1,movy1)              
 
+# the traffic light appears every 250 cycles and stops the code
     def traffic(self):
         if i==250 or i==500 or i==750:
             self.OR = canvas.create_oval(self.x0+20,self.y0+10,self.x0+40,self.y0-10, fill='red')
@@ -289,7 +291,7 @@ class treasure(robot):
 
 try1=treasure()
 try1.drawRobot(canvas)
-for h in range (12):
+for h in range (10):
     try1.drawObstacle(canvas)
 try1.createtreasure(canvas)
 listavoidx1=list(listavoidx)
