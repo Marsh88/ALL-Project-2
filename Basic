@@ -1,0 +1,221 @@
+import random
+import time
+import math
+import copy
+import urllib
+import base64
+from Tkinter import*
+import Tkinter as tk
+window = Tk() 
+listavoidx=[]
+listavoidy=[]
+ob1=1
+score=0
+score1=Label(window, text="the amount of times the treasure has be found is %s")
+# Use urllib to access a public url and import it through base64 as a .gif image usable in Tkinter (the file has to be formatted as a .gif to begin with)
+
+URL = "https://djaspermorris.files.wordpress.com/2015/01/seawaves.gif"
+u = urllib.urlopen(URL)
+raw_data = u.read()
+u.close()
+
+
+b64_data = base64.encodestring(raw_data)
+gif1 = tk.PhotoImage(data=b64_data)
+
+# Create the canvas
+
+canvas = Canvas(width = 500, height = 400, bg = 'white')
+
+# Pack the canvas into a frame/form
+
+canvas.pack(expand = YES, fill = BOTH)
+
+# Put gif image on canvas
+# The gif image's upper left corner on the canvas is at x=0 y=0
+
+canvas.create_image(0, 0, image = gif1, anchor = NW)
+
+# Run the code)
+
+class object1:
+    def __init__(self,x=50,y0=50,sizex=4,sizey=4,colour='blue'):
+        self.x0=x0
+        self.y0=y0
+        self.sizex=sizex
+        self.sizey=sizey
+        self.colour=colour
+
+    def drawRobot(self, canvas): 
+        self.canvas = canvas
+        self.shape = canvas.create_oval(self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey, fill=self.colour)
+
+    def drawObstacle(self, canvas):
+        self.l1=len(listavoidx)
+        self.l2=len(listavoidy)
+        self.l3=0
+        self.sizex1=random.randint(20,30)
+        self.sizey1=random.randint(20,30)
+        self.x02=random.randint(15,400)
+        self.y02=random.randint(150,475)
+        self.xEnd=self.sizex1+self.x02
+        self.yEnd=self.sizey1+self.y02
+        while self.l3<50:
+            l=0
+            while l<self.l1:
+                if listavoidx[l]-self.xEnd<=self.sizex :
+                    if self.x02>listavoidx[l]:
+                        self.x02=50+self.x02
+                        self.xEnd=50+self.xEnd
+                    else:
+                        self.x02=self.x02-50
+                        self.xEnd= self.xEnd-50
+                if listavoidy[l]-self.yEnd <=self.sizey:
+                    if self.y02<=listavoidy[l]:
+                        self.y02=self.y02-50
+                        self.yEnd=self.yEnd-50
+                    else:
+                        self.y02=self.y02+50
+                        self.yEnd=self.yEnd +50
+                if self.x02<0:
+                        self.x02=(50+self.sizex)+self.x0
+                        self.xEnd=(50+self.sizex)+self.xEnd                
+                if self.xEnd>500:
+                        self.x02=self.x02-(50+self.sizex)
+                        self.xEnd=self.xEnd-(50+self.sizex)
+                if self.y02<0:
+                        self.y02=(50+self.sizey)+self.y02
+                        self.xEnd=(50+self.sizey)+self.xEnd
+                if self.yEnd>400:
+                        self.y02=self.y02-(50+self.sizey)  
+                        self.yEnd=self.yEnd-(50+self.sizey)  
+                l+=1
+            self.l3+=1        
+        listavoidx.append (self.x02)
+        listavoidy.append (self.y02)
+        self.shape1 = canvas.create_oval(self.x02, self.y02, self.xEnd, self.yEnd, fill='grey')
+        return(self.l1)
+    
+class treasure(object1):
+    def __init__(self,x0=random.randint(15,400),y0=0,sizex=4,sizey=4,colour='blue'):
+        self.x0=x0
+        self.y0=y0
+        self.sizex=sizex
+        self.sizey=sizey
+        self.colour=colour
+        
+    def createtreasure(self,canvas):
+        rv=random.randint(0,self.l1)
+        self.tx1=listavoidx[rv]
+        self.ty1=listavoidy[rv]
+        self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
+        return (self.tr1)
+
+    def roam(self):
+        self.x01=self.tx1-self.x0
+        if self.x01>0: 
+            self.y01=self.ty1-self.y0
+            if self.y01<0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=(hyp1/lg1*math.cos(ang1))
+                movy1=-(hyp1/lg1*(math.cos(90-ang1)))
+            if self.y01>0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=(hyp1/lg1*math.cos(ang1))
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+        if self.x01<0: 
+            self.y01=self.ty1-self.y0
+            if self.y01<0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                
+                movy1=-(hyp1/lg1*(math.cos(90-ang1)))
+            if self.y01>0:
+                hyp1=math.sqrt(self.x01**2+self.y01**2)
+                ang1=math.acos(abs(self.x01)/hyp1)
+                lg1=hyp1/5
+                movx1=-(hyp1/lg1*math.cos(ang1))
+                movy1=(hyp1/lg1*math.cos(90-ang1))
+            
+            for m in range(self.l1+1):
+                ox1=listavoidx[m]-(self.x0-15)
+                oy1=listavoidy[m]-(self.y0-15)
+                od1=math.sqrt(ox1**2+oy1**2)
+                if od1<20:
+                    if ox1>0:
+                        if oy1>0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=-2
+                                if movy1>movx1:
+                                    movx1=-10
+                                    movy1=-2
+                        if oy1<0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=10
+                                    movx1=-2
+                                if movy1>movx1:
+                                    movx1=-10
+                                    movy1=2
+                    if ox1<0:
+                        if oy1>0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=2
+                                if movy1>movx1:
+                                    movx1=10
+                                    movy1=-2                
+                        if oy1<0:
+                            for n in range (5):
+                                if movx1>movy1:
+                                    movy1=-10
+                                    movx1=2
+                                if movy1>movx1:
+                                    movx1=10
+                                    movy1=2                
+
+            
+        self.x0+=movx1
+        self.y0+=movy1
+
+        self.canvas.coords(self.shape , self.x0, self.y0, self.x0 + self.sizex, self.y0 + self.sizey) 
+        self.canvas.update()
+        return(self.x01,self.y01)        
+
+    def changetreasure(self):
+        if abs(self.x01)<20 and abs(self.y01)<20:
+            rv=random.randint(0,self.l1)
+            self.tx1=listavoidx[rv]
+            self.ty1=listavoidy[rv]
+            canvas.delete(self.tr1)
+            self.tr1=canvas.create_oval(self.tx1+10,self.ty1+10,self.tx1+20,self.ty1+20,fill='gold')
+            canvas.update()
+
+    def score2(self):
+        global score
+        if abs(self.x01)<20 and abs(self.y01)<20:
+            score+=1
+        score1.config(text="the amount of times the treasure has be found is %s" %(score))
+        score1.pack()
+
+try1=treasure()
+try1.drawRobot(canvas)
+for i in range (12):
+    try1.drawObstacle(canvas)
+try1.createtreasure(canvas)
+for i in range (750):
+    try1.roam()
+    try1.changetreasure()
+    try1.score2()
+    time.sleep(0.1)
+
+window.mainloop() 
